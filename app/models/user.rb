@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :apartment_number, presence: true, unless: -> { role == :gatekeeper }
   validates :role, presence: true
+  has_many :issues, dependent: :destroy
+  has_many :disputes, dependent: :destroy
 
   # Enums
   enum :role, { admin: 0, manager: 1, resident: 2, gatekeeper: 3 }
