@@ -10,13 +10,13 @@ test "can register a new user" do
     get new_user_registration_path
     assert_response :success
 
-    assert_difference('User.count') do
-    post user_registration_path, params: { 
-        user: { 
+    assert_difference("User.count") do
+    post user_registration_path, params: {
+        user: {
         email: "newuser@example.com",
         password: "password123",
         password_confirmation: "password123"
-        } 
+        }
     }
     end
 
@@ -34,7 +34,7 @@ test "can sign in" do
     post user_session_path, params: {
     user: {
         email: user.email,
-        password: 'password123'
+        password: "password123"
     }
     }
 
@@ -45,12 +45,11 @@ end
 
 test "can sign out" do
     sign_in users(:valid_user)
-    
+
     delete destroy_user_session_path
-    
+
     assert_redirected_to root_path
     follow_redirect!
     assert_select "div", /Signed out successfully/
 end
 end
-
