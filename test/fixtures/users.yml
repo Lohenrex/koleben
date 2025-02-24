@@ -1,0 +1,8 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+valid_user:
+  email: user@example.com
+  name: Test User
+  apartment_number: "101"
+  role: :resident
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
