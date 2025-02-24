@@ -1,36 +1,11 @@
 <% if user_signed_in? %>
-  <div class="column is-6 is-offset-3 has-text-centered">
-    <h1 class="title">
-      Welcome back, <%= current_user.name %> from <%= current_user.apartment_number %>. You are 1 out of <%= @total_users %> users.
-    </h1>
-  </div>
+<h1>Welcome, <%= current_user.name %></h1>
+<p>Apartment: <%= current_user.apartment_number %></p>
+<%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "button" %>
 <% else %>
-  <div class="container mt-5">
-    <div class="text-center mb-5">
-      <h1 class="display-4">Welcome to Our Application</h1>
-      <p class="lead">Your one-stop solution for managing everything</p>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <% if user_signed_in? %>
-          <div class="alert alert-success">
-            <h2>Welcome back, <%= current_user.email %>!</h2>
-            <p>You are successfully signed in.</p>
-            <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
-          </div>
-        <% else %>
-          <div class="card">
-            <div class="card-body text-center">
-              <h2 class="card-title mb-4">Get Started</h2>
-              <div class="d-grid gap-3">
-                <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
-                <%= link_to "Sign In", new_user_session_path, class: "btn btn-outline-primary btn-lg" %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+<h1>Welcome to Our Community</h1>
+<div class="auth-links">
+    <%= link_to "Log In", new_user_session_path, class: "button" %>
+    <%= link_to "Sign Up", new_user_registration_path, class: "button" %>
+</div>
 <% end %>
