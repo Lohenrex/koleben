@@ -1,15 +1,6 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :trackable, :confirmable
+  has_secure_password
+  has_many :sessions, dependent: :destroy
 
-  # Validations
-  validates :name, presence: true
-  validates :apartment_number, presence: true, unless: -> { role == :gatekeeper }
-  validates :role, presence: true
-
-  # Enums
-  enum :role, { admin: 0, manager: 1, resident: 2, gatekeeper: 3 }
+  normalizes :email_address, with: ->(e) { e.strip.downcase }
 end
