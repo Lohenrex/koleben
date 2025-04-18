@@ -1,8 +1,28 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% password_digest = BCrypt::Password.create("password") %>
 
-valid_user:
-  email: user@example.com
-  name: Test User
-  apartment_number: "101"
-  role: :resident
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password123') %>
+# Regular user
+one:
+  name: Regular User
+  apartment_number: 101
+  is_owner: false
+  phone_number: "555-123-4567"
+  email_address: one@example.com
+  password_digest: <%= password_digest %>
+
+# Owner user
+two:
+  name: Owner User
+  apartment_number: 202
+  is_owner: true
+  phone_number: "555-987-6543"
+  email_address: two@example.com
+  password_digest: <%= password_digest %>
+
+# User with unique data for create tests
+new_user:
+  name: New User
+  apartment_number: 303
+  is_owner: false
+  phone_number: "555-555-5555"
+  email_address: new@example.com
+  password_digest: <%= password_digest %>

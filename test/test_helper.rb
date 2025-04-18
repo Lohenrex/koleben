@@ -25,5 +25,20 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    # Helper method to simulate login
+    def login_as(user)
+      # Create a session for the user
+      session = user.sessions.create!(
+        user_agent: "Rails Testing",
+        ip_address: "127.0.0.1"
+      )
+
+      # Set the session cookie
+      cookies[:session_id] = {
+        value: session.id,
+        httponly: true,
+        same_site: :lax
+      }
+    end
   end
 end
