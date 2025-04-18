@@ -1,0 +1,49 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, "Name", class: "form-label" %>
+    <%= form.text_field :name, required: true, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :apartment_number, "Apartment Number", class: "form-label" %>
+    <%= form.number_field :apartment_number, required: true, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 form-check">
+    <%= form.check_box :is_owner, class: "form-check-input" %>
+    <%= form.label :is_owner, "Owner", class: "form-check-label" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :phone_number, "Phone Number", class: "form-label" %>
+    <%= form.telephone_field :phone_number, required: true, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email_address, "Email Address", class: "form-label" %>
+    <%= form.email_field :email_address, required: true, class: "form-control" %>
+  </div>
+
+  <% if user.new_record? %>
+    <div class="mb-3">
+      <%= form.label :password, "Password", class: "form-label" %>
+      <%= form.password_field :password, required: true, class: "form-control" %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
